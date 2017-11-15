@@ -8,14 +8,43 @@ public class Brick : MonoBehaviour {
 
     private int numberOfHits;
 
-    void OnCollisionEnter2D(Collision2D collision)
+    private LevelManager myLevelManager;
+
+    bool isBreakable = false;
+
+    void SimulateWin()
+    {
+        myLevelManager.LoadNextLevel();
+    }
+
+    void HandleHits()
     {
         numberOfHits++;
-        print(numberOfHits);
+        if (numberOfHits >= maxHits)
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        isBreakable = (this.tag == "Break");
+
+        if (isBreakable) //if isBreakable == true
+        {
+            HandleHits();
+        }
+        
+
+        
     }
 
     // Use this for initialization
     void Start () {
+
+        myLevelManager = GameObject.FindObjectOfType<LevelManager>();
+
+        numberOfHits = 0;
 		
 	}
 	

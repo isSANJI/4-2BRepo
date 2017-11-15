@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class Paddle : MonoBehaviour {
 
+    private Ball myBall;
+
 	// Use this for initialization
 	void Start () {
+
+        myBall = GameObject.FindObjectOfType<Ball>();
 		
 	}
 	
@@ -24,7 +28,7 @@ public class Paddle : MonoBehaviour {
         
 
         //make the paddle move with the mouse
-        paddlePosition.x = Mathf.Clamp(mousePosInUnits, -6.5f, 6.5f);
+        paddlePosition.x = Mathf.Clamp(myBall.transform.position.x, -6.5f, 6.5f);
 
         
 
