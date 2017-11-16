@@ -10,8 +10,37 @@ public class Ball : MonoBehaviour {
 
     private bool hasStarted = false;
 
-	// Use this for initialization
-	void Start () {
+    float randomX, randomY;
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (hasStarted == true)
+        {
+            this.GetComponent<AudioSource>().Play();
+        }
+        
+        //if ball is going down
+        //increase y in the negative
+        if (collision.gameObject.name == "Top Roof")
+        {
+            randomY = Random.Range(-0.5f, 0f);
+            Vector2 tweak = new Vector2(randomX, randomY);
+            this.GetComponent<Rigidbody2D>().velocity += tweak;
+        }
+        else
+        {
+
+            Vector2 tweak = new Vector2(randomX, randomY);
+            this.GetComponent<Rigidbody2D>().velocity += tweak;
+        }
+
+    }
+
+    // Use this for initialization
+    void Start () {
+
+        randomX = Random.Range(0f, 0.5f);
+        randomY = Random.Range(0f, 0.5f);
 
         //attaches the object itslef rather than
         //having to attach the Paddle myself
